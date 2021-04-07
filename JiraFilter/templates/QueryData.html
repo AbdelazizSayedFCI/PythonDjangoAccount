@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Django JIRA Filter</title>
+    <style>
+        table, th, td {
+          border: 1px solid black;
+          text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <pre><center>
+        <h1>Jira Projects Query Form</h1>
+        <form action = '' method="post">
+            <!-- Very Important csrf Token -->
+            {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" name ="Go !">
+        {% if issues %}
+        <table style="width:85%; border-spacing: 3px;" >
+            <tr>
+              <th>Key</th>
+              <th>Summary</th>
+              <th>Status</th>
+              <th>Reporter</th>
+              <th>Assignee</th>
+              <th>Updated</th>
+            </tr>
+            {% for issue in issues %}
+            <tr>
+              <td>{{issue.key}}</td>
+              <td>{{issue.summary}}</td>
+              <td>{{issue.status}}</td>
+              <td>{{issue.reporter}}</td>
+              <td>{{issue.assignee}}</td>
+              <td>{{issue.updated}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {%endif%}
+    </form>
+    </center></pre>
+</body>
+</html>
